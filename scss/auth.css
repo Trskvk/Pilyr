@@ -1,0 +1,201 @@
+:root {
+  --primary: #00bfa5;
+  --songs-in-row: 4;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-family: Arial, serif;
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+  color: #fff;
+}
+
+body {
+  margin-top: 60px;
+  background-color: #34343f;
+}
+
+nav {
+  display: flex;
+  padding: 0 10px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  width: 100%;
+  height: 60px;
+  line-height: 60px;
+  background-color: #1b1b1b;
+  color: #fff;
+  justify-content: space-between;
+}
+nav .title {
+  font-size: 20px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+nav .menu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  list-style-type: none;
+}
+nav .menu li {
+  padding: 0 10px;
+  cursor: pointer;
+}
+nav .menu li a {
+  transition: color 0.2s ease-in-out;
+  color: #fff;
+  text-decoration: none;
+}
+nav .menu li:hover a, nav .menu li.active a {
+  color: var(--primary);
+}
+
+.container {
+  display: block;
+  margin: 0 auto;
+  width: 1000px;
+  max-width: calc(100% - 20px);
+  min-height: calc(100vh - 60px);
+}
+
+.page {
+  margin-top: 80px;
+  margin-bottom: 20px;
+}
+
+.page[data-page=login],
+.page[data-page=signup] {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: calc(100vh - 100px);
+}
+.page[data-page=login] .box,
+.page[data-page=signup] .box {
+  display: block;
+  width: 400px;
+  height: 300px;
+  box-shadow: 0 0 20px 2px #1b1b1b;
+  border-radius: 5px;
+  padding: 20px;
+}
+.page[data-page=login] .box.box-large,
+.page[data-page=signup] .box.box-large {
+  height: 500px;
+}
+.page[data-page=login] .box .header,
+.page[data-page=signup] .box .header {
+  font-size: 25px;
+  color: #fff;
+  text-align: center;
+}
+.page[data-page=login] .box form,
+.page[data-page=signup] .box form {
+  margin-top: 20px;
+}
+.page[data-page=login] .box form .form-group,
+.page[data-page=signup] .box form .form-group {
+  display: block;
+  position: relative;
+}
+.page[data-page=login] .box form .form-group.flex-group,
+.page[data-page=signup] .box form .form-group.flex-group {
+  display: flex;
+  justify-content: space-between;
+}
+.page[data-page=login] .box form .form-group:not(:last-child),
+.page[data-page=signup] .box form .form-group:not(:last-child) {
+  margin-bottom: 40px;
+}
+.page[data-page=login] .box form .form-group label, .page[data-page=login] .box form .form-group input, .page[data-page=login] .box form .form-group select,
+.page[data-page=signup] .box form .form-group label,
+.page[data-page=signup] .box form .form-group input,
+.page[data-page=signup] .box form .form-group select {
+  width: 100%;
+  font-size: 18px;
+  color: #fff;
+}
+.page[data-page=login] .box form .form-group label,
+.page[data-page=signup] .box form .form-group label {
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 38px;
+  line-height: 38px;
+  margin-bottom: 5px;
+  pointer-events: none;
+  top: 2px;
+  left: 10px;
+  font-size: 18px;
+  color: #b9b9b9;
+  transition: top 0.2s ease-in-out, left 0.2s ease-in-out, color 0.2s ease-in-out, font-size 0.2s ease-in-out;
+}
+.page[data-page=login] .box form .form-group input, .page[data-page=login] .box form .form-group select,
+.page[data-page=signup] .box form .form-group input,
+.page[data-page=signup] .box form .form-group select {
+  background-color: transparent;
+  padding: 10px;
+  border: 1px solid var(--primary);
+  border-radius: 5px;
+  outline: none;
+}
+.page[data-page=login] .box form .form-group input:focus + label, .page[data-page=login] .box form .form-group input:not(:placeholder-shown) + label, .page[data-page=login] .box form .form-group select:focus + label, .page[data-page=login] .box form .form-group select:not(:placeholder-shown) + label,
+.page[data-page=signup] .box form .form-group input:focus + label,
+.page[data-page=signup] .box form .form-group input:not(:placeholder-shown) + label,
+.page[data-page=signup] .box form .form-group select:focus + label,
+.page[data-page=signup] .box form .form-group select:not(:placeholder-shown) + label {
+  top: -30px;
+  left: 0;
+  font-size: 14px;
+  color: var(--primary);
+}
+.page[data-page=login] .box form .form-group button, .page[data-page=login] .box form .form-group a,
+.page[data-page=signup] .box form .form-group button,
+.page[data-page=signup] .box form .form-group a {
+  display: inline-block;
+  background-color: transparent;
+  cursor: pointer;
+  color: #fff;
+  line-height: 35px;
+}
+.page[data-page=login] .box form .form-group button:not(.flat), .page[data-page=login] .box form .form-group a:not(.flat),
+.page[data-page=signup] .box form .form-group button:not(.flat),
+.page[data-page=signup] .box form .form-group a:not(.flat) {
+  display: block;
+  border: 2px solid var(--primary);
+  font-size: 18px;
+  padding: 5px 20px;
+  border-radius: 5px;
+  color: var(--primary);
+  cursor: pointer;
+  transition: background-color 0.15s ease-in-out, color 0.15s ease-in-out;
+}
+.page[data-page=login] .box form .form-group button:not(.flat):hover, .page[data-page=login] .box form .form-group a:not(.flat):hover,
+.page[data-page=signup] .box form .form-group button:not(.flat):hover,
+.page[data-page=signup] .box form .form-group a:not(.flat):hover {
+  background-color: var(--primary);
+  color: #fff;
+}
+.page[data-page=login] .box form .form-group button.flat, .page[data-page=login] .box form .form-group a.flat,
+.page[data-page=signup] .box form .form-group button.flat,
+.page[data-page=signup] .box form .form-group a.flat {
+  transition: color 0.15s ease-in-out;
+}
+.page[data-page=login] .box form .form-group button.flat:hover, .page[data-page=login] .box form .form-group a.flat:hover,
+.page[data-page=signup] .box form .form-group button.flat:hover,
+.page[data-page=signup] .box form .form-group a.flat:hover {
+  color: var(--primary);
+}
+
+/*# sourceMappingURL=auth.css.map */

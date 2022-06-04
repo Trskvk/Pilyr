@@ -1,0 +1,211 @@
+:root {
+  --primary: #00bfa5;
+  --songs-in-row: 4;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-family: Arial, serif;
+  box-sizing: border-box;
+}
+
+body {
+  margin-top: 60px;
+  background-color: #34343f;
+}
+
+nav {
+  display: flex;
+  padding: 0 10px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  width: 100%;
+  height: 60px;
+  line-height: 60px;
+  background-color: #1b1b1b;
+  color: #fff;
+  justify-content: space-between;
+}
+nav .title {
+  font-size: 20px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+nav .menu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  list-style-type: none;
+}
+nav .menu li {
+  padding: 0 10px;
+  cursor: pointer;
+}
+nav .menu li a {
+  transition: color 0.2s ease-in-out;
+  color: #fff;
+  text-decoration: none;
+}
+nav .menu li:hover a, nav .menu li.active a {
+  color: var(--primary);
+}
+
+.container {
+  display: block;
+  margin: 0 auto;
+  width: 1000px;
+  max-width: calc(100% - 20px);
+  min-height: calc(100vh - 60px);
+}
+
+.page {
+  margin-top: 80px;
+  margin-bottom: 20px;
+}
+
+.page[data-page=user] .playlists {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 20px;
+}
+.page[data-page=user] .playlists > * {
+  box-shadow: 0 0 6px 0 #1b1b1b;
+  border-radius: 5px;
+}
+.page[data-page=user] .playlists .title {
+  display: block;
+  width: 100%;
+  font-size: 20px;
+  color: #fff;
+  padding: 15px;
+  background-color: #2e2e38;
+}
+.page[data-page=user] .playlists .search-box {
+  width: 100%;
+}
+.page[data-page=user] .playlists .search-box form {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.page[data-page=user] .playlists .search-box form input {
+  width: calc(100% - 51px);
+  background-color: transparent;
+  padding: 15px;
+  outline: none;
+  color: #fff;
+  font-size: 18px;
+}
+.page[data-page=user] .playlists .search-box form input ~ .anim {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: #34343f;
+}
+.page[data-page=user] .playlists .search-box form input ~ .anim:after {
+  content: "";
+  display: block;
+  height: 2px;
+  width: 100%;
+  max-width: 0px;
+  transition: max-width 0.3s ease-in-out;
+  background-color: var(--primary);
+}
+.page[data-page=user] .playlists .search-box form input:focus ~ .anim:after {
+  content: "";
+  max-width: 100%;
+}
+.page[data-page=user] .playlists .search-box form button {
+  background-color: transparent;
+  padding: 0 10px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+  width: 51px;
+  height: 51px;
+}
+.page[data-page=user] .playlists .search-box form button svg {
+  fill: var(--primary);
+  transition: fill 0.2s ease-in-out;
+}
+.page[data-page=user] .playlists .search-box form button:hover {
+  background-color: var(--primary);
+}
+.page[data-page=user] .playlists .search-box form button:hover svg {
+  fill: #fff;
+}
+.page[data-page=user] .playlists .content {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  width: 100%;
+}
+.page[data-page=user] .playlists .content .playlist {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  width: 100%;
+  height: 60px;
+  padding: 10px;
+  border-top: 1px solid #1b1b1b;
+  cursor: pointer;
+}
+.page[data-page=user] .playlists .content .playlist .left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  height: 100%;
+  text-align: left;
+}
+.page[data-page=user] .playlists .content .playlist .left .name {
+  font-weight: bold;
+  font-size: 17px;
+  color: #fff;
+}
+.page[data-page=user] .playlists .content .playlist .left .creator {
+  font-size: 14px;
+  color: #b9b9b9;
+}
+.page[data-page=user] .playlists .content .playlist .right {
+  line-height: 40px;
+  color: #b9b9b9;
+}
+.page[data-page=user] .playlists .content .playlist:hover {
+  background-color: #434352;
+}
+.page[data-page=user] .playlists .content .playlist:hover .left .name {
+  color: var(--primary);
+}
+.page[data-page=user] .playlists .genres {
+  width: 30%;
+  position: sticky;
+  top: 80px;
+  overflow: hidden;
+}
+.page[data-page=user] .playlists .genres .list {
+  list-style-type: none;
+}
+.page[data-page=user] .playlists .genres .list li {
+  border-top: 1px solid #1b1b1b;
+  padding: 10px;
+  font-size: 18px;
+  color: #b9b9b9;
+  cursor: pointer;
+  transition: all 0.05s ease-in-out;
+}
+.page[data-page=user] .playlists .genres .list li:hover {
+  color: var(--primary);
+  background-color: #434352;
+}
+
+/*# sourceMappingURL=user.css.map */

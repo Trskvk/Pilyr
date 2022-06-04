@@ -1,0 +1,87 @@
+:root {
+  --primary: #00bfa5;
+  --songs-in-row: 4;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-family: Arial, serif;
+  box-sizing: border-box;
+}
+
+// reset A tag
+a{
+  text-decoration: none;
+  color: #fff;
+}
+
+body {
+  margin-top: 60px; // to prevent the navbar from covering the content
+  background-color: #34343f;
+}
+
+nav {
+  display: flex;
+  padding: 0 10px;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+
+  width: 100%;
+  height: 60px;
+
+  line-height: 60px;
+
+  background-color: #1b1b1b;
+  color: #fff;
+  justify-content: space-between;
+
+  user-select: none;
+
+  .title {
+    font-size: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+
+  .menu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+
+    list-style-type: none;
+
+    li {
+      padding: 0 10px;
+      cursor: pointer;
+
+      a{
+        transition: color .2s ease-in-out;
+        color: #fff;
+        text-decoration: none;
+      }
+
+      &:hover a, &.active a{
+        color: var(--primary);
+      }
+    }
+  }
+}
+
+.container {
+  display: block;
+  margin: 0 auto;
+  width: 1000px;
+  max-width: calc(100% - 20px);
+  min-height: calc(100vh - 60px);
+}
+
+.page{
+  margin-top: 80px;
+  margin-bottom: 20px;
+}
