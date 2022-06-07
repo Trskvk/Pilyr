@@ -1,0 +1,25 @@
+{
+  "name": "web-lab",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/main.old.js",
+  "scripts": {
+    "dev": "vite --host",
+    "build": "vite build",
+    "preview": "vite preview",
+    "upgrade": "git pull && vide build"
+  },
+  "dependencies": {
+    "@vitejs/plugin-vue": "^2.3.1",
+    "autoprefixer": "^10.4.4",
+    "postcss": "^8.4.12",
+    "sass": "^1.50.1",
+    "sass-loader": "^12.6.0",
+    "vite": "^2.9.5",
+    "vue": "^3.2.25",
+    "vue-router": "^4.0.14",
+    "vuex": "^4.0.2"
+  },
+  "author": "",
+  "license": "ISC"
+}
