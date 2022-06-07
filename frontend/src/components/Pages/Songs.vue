@@ -24,8 +24,6 @@
 
 <script>
 import SongItem from '../Helpers/SongItem.vue'
-import FakeData from '../../helpers/FakeDataGenerator';
-
 export default {
   name: "Songs",
   components: {

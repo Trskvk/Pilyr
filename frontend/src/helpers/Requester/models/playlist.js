@@ -6,20 +6,19 @@ class Playlist extends DefaultModel {
         this.path = '/playlist';
     }
 
-    addSong(playlist_id, song_id) {
+    addSong(playlistId, songId) {
         return this.ajax.request('POST', `${this.path}/addSong`, {
-            song_id,
-            playlist_id,
+            songId,
+            playlistId,
         });
     }
 
-    removeSong(playlist_id, song_id) {
+    removeSong(playlistId, songId) {
         return this.ajax.request('DELETE', `${this.path}/removeSong`, {
-            song_id,
-            playlist_id,
+            songId,
+            playlistId,
         });
     }
-
 }
 
 export default Playlist;

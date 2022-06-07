@@ -4,6 +4,7 @@
   "description": "",
   "main": "src/main.old.js",
   "scripts": {
+    "lint": "eslint src/**/*.js --fix --ignore-pattern node_modules/",
     "dev": "vite --host",
     "build": "vite build",
     "preview": "vite preview",
@@ -21,5 +22,10 @@
     "vuex": "^4.0.2"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^8.17.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.26.0"
+  }
 }

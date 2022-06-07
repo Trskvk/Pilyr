@@ -7,15 +7,14 @@ class User extends DefaultModel {
     }
 
     async login(username, password) {
-        if (!username || !password)
-            throw new Error('Username or/and password are required');
+        if (!username || !password) throw new Error('Username or/and password are required');
 
-        let response = await this.ajax.request('POST', `${this.path}/login`, {
+        const response = await this.ajax.request('POST', `${this.path}/login`, {
             username,
-            password
+            password,
         });
 
-        if(this.success){
+        if (this.success) {
             this.ajax.token = response.user.accessToken;
         }
 
@@ -23,16 +22,15 @@ class User extends DefaultModel {
     }
 
     async register(username, password, role) {
-        if (!username || !password)
-            throw new Error('Username or/and password are required');
+        if (!username || !password) throw new Error('Username or/and password are required');
 
-        let response = await this.ajax.request('POST', `${this.path}`, {
+        const response = await this.ajax.request('POST', `${this.path}`, {
             username,
             password,
-            role
+            role,
         });
 
-        if(response.user?.accessToken){
+        if (response.user && response.user.accessToken) {
             this.ajax.token = response.user.accessToken;
         }
 

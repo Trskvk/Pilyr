@@ -64,8 +64,6 @@
 
 <script>
 import PlaylistItem from '../helpers/PlaylistItem.vue'
-import FakeData from '../../helpers/FakeDataGenerator';
-
 export default {
   name: "Profile",
   components: {
@@ -207,7 +205,7 @@ export default {
             display: block;
             height: 2px;
             width: 100%;
-            max-width: 0px;
+            max-width: 0;
             transition: max-width .3s ease-in-out;
             background-color: var(--primary);
           }

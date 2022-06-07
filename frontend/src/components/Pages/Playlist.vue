@@ -6,7 +6,7 @@
           <div class="playlist-header">
             <input :class="['playlist-title', editModeActive ? 'active' : '']" v-model="new_title"
                    @blur="renamePlaylist()"
-                   @keydown="e => e.keyCode === 13 ? (e.preventDefault(), renamePlaylist()): null">
+                   @keydown="processKeyDown">
             <div class="playlist-author">{{ playlist?.creator?.username || '' }}</div>
             <div class="playlist-details">
               <div class="items-amount">{{ playlist?.songs?.length || 0}} song<span v-if="playlist?.songs?.length > 1">s</span>
@@ -68,7 +68,6 @@
 import SongItem from '../Helpers/SongItem.vue'
 import TrashIcon from '../Icons/TrashIcon.vue'
 import EditIcon from '../Icons/EditIcon.vue'
-import FakeData from '../../helpers/FakeDataGenerator';
 
 export default {
   name: "Playlist.vue",
@@ -102,6 +101,12 @@ export default {
       this.new_title = this.playlist.title;
       this.search_list = (await this.$api.song.list()).data;
       this.loading = false;
+    },
+    processKeyDown(e){
+      if(e.keyCode === 13){
+        e.preventDefault()
+        this.renamePlaylist()
+        }
     },
     toggleEditMode() {
       this.editModeActive = !this.editModeActive;

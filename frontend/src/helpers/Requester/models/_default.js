@@ -1,39 +1,38 @@
 import Ajax from '../ajax';
 
-class DefaultModel{
+class DefaultModel {
     constructor(ajax) {
-        if(Object.getPrototypeOf(ajax) !== Ajax.prototype)
-            throw new Error('Ajax object is required');
+        if (Object.getPrototypeOf(ajax) !== Ajax.prototype) throw new Error('Ajax object is required');
         this.ajax = ajax;
         this.path = null;
     }
 
-    async list(params = {}){
-        return await this.ajax.request('GET', this.path+'/list', params);
+    async list(params = {}) {
+        return this.ajax.request('GET', `${this.path}/list`, params);
     }
 
-    async get(id, params = {}){
-        return await this.ajax.request('GET', this.path, {
+    async get(id, params = {}) {
+        return this.ajax.request('GET', this.path, {
             id,
-            ...params
+            ...params,
         });
     }
 
-    async create(params= {}){
-        return await this.ajax.request('POST', this.path, params);
+    async create(params = {}) {
+        return this.ajax.request('POST', this.path, params);
     }
 
-    async update(id, key, value){
-        return await this.ajax.request('PUT', this.path, {
+    async update(id, key, value) {
+        return this.ajax.request('PUT', this.path, {
             id,
             key,
-            value
+            value,
         });
     }
 
-    async delete(id){
-        return await this.ajax.request('DELETE', this.path, {
-            id
+    async delete(id) {
+        return this.ajax.request('DELETE', this.path, {
+            id,
         });
     }
 }
