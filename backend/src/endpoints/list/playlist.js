@@ -199,7 +199,7 @@ class PlaylistEndpoint extends ApiEndpointSecured {
 
         if (!item) throw new Error('Item not found');
 
-        if (!is_admin && item.creator._id !== user._id) throw new Error('You are not allowed to edit this playlist');
+        if (item.type === "private" && !is_admin && item.creator._id.toString() !== user._id.toString()) throw new Error('You are not allowed to edit this playlist');
 
         return await this.db.findOneAndUpdate({
             _id: playlist_id

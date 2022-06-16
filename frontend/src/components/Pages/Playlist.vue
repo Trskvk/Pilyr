@@ -146,7 +146,10 @@ export default {
       return this.playlist.can_edit;
     },
     search_list_filtered() {
-      return this.search_list.filter(e => e.title.toLowerCase().includes(this.search_query.toLowerCase()));
+      let list = this.search_list.filter(e => !(this.playlist?.songs || []).map(e => e._id).includes(e._id));
+      if(!this.search_query) return list;
+      // remove which exists
+      return list.filter(e => e.title.toLowerCase().includes(this.search_query.toLowerCase()))
     }
   }
 }

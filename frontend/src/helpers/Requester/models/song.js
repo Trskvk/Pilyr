@@ -1,4 +1,4 @@
-import DefaultModel from './_default';
+import DefaultModel from './_default.js';
 
 class Song extends DefaultModel {
     constructor(ajax) {
