@@ -28,10 +28,11 @@
 
 <script>
 import PlaylistItem from '../Helpers/PlaylistItem.vue'
+
 export default {
   name: "Playlists",
   components: {
-    PlaylistItem
+    PlaylistItem,
   },
   data() {
     return {

@@ -2,9 +2,11 @@
   "name": "web-lab",
   "version": "1.0.0",
   "description": "",
+  "type": "module",
   "main": "src/main.old.js",
   "scripts": {
     "lint": "eslint src/**/*.js --fix --ignore-pattern node_modules/",
+    "test": "env TS_NODE_COMPILER_OPTIONS='{\"module\": \"commonjs\" }' mocha -r ./node_modules/ts-node/register 'tests/**/*.js'",
     "dev": "vite --host",
     "build": "vite build",
     "preview": "vite preview",
@@ -24,6 +26,8 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "chai": "^4.3.6",
+    "coverage-node": "^6.1.0",
     "eslint": "^8.17.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.26.0"

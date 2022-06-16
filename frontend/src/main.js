@@ -5,8 +5,6 @@ import BackendConnector from './helpers/Requester';
 
 import App from './App.vue';
 import routes from './routes';
-// import Songs from './components/Pages/'
-// import Songs from './components/Pages/'
 
 const API_URL = 'http://localhost:8080';
 

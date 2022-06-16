@@ -7,6 +7,9 @@
             <input :class="['playlist-title', editModeActive ? 'active' : '']" v-model="new_title"
                    @blur="renamePlaylist()"
                    @keydown="processKeyDown">
+            <div class="delete-button">
+              <LockIcon v-if="playlist?.type === 'private'" />
+            </div>
             <div class="playlist-author">{{ playlist?.creator?.username || '' }}</div>
             <div class="playlist-details">
               <div class="items-amount">{{ playlist?.songs?.length || 0}} song<span v-if="playlist?.songs?.length > 1">s</span>
@@ -14,10 +17,6 @@
               <div class="items-duration">{{ duration }}</div>
             </div>
 
-
-            <a :class="['delete-button', editModeActive && canEdit ? 'active' : '']" @click.prevent="toggleEditMode">
-              <TrashIcon/>
-            </a>
 
             <a :class="['add-button', editModeActive&& canEdit  ? 'active' : '']"
                @click.prevent="addModalActive = true">
@@ -68,13 +67,15 @@
 import SongItem from '../Helpers/SongItem.vue'
 import TrashIcon from '../Icons/TrashIcon.vue'
 import EditIcon from '../Icons/EditIcon.vue'
+import LockIcon from '../icons/LockIcon.vue';
 
 export default {
-  name: "Playlist.vue",
+  name: "Playlist",
   components: {
     SongItem,
     EditIcon,
-    TrashIcon
+    TrashIcon,
+    LockIcon
   },
   data() {
     return {
@@ -90,7 +91,6 @@ export default {
     }
   },
   async mounted() {
-    // this.playlist = FakeData.gen_genre();
     await this.reload();
   },
   methods: {
@@ -112,8 +112,6 @@ export default {
       this.editModeActive = !this.editModeActive;
     },
     async addSong(song) {
-      // this.playlist.songs.push(song);
-      // console.log(song)
       let response = await this.$api.playlist.addSong(this.playlist._id, song._id);
       this.playlist.songs = response.songs;
       this.addModalActive = false;
@@ -128,7 +126,6 @@ export default {
       if (!this.new_title || this.playlist.title === this.new_title) {
         return this.new_title = this.playlist.title;
       }
-
 
       await this.$api.playlist.update(this.playlist._id, 'title', this.new_title);
       this.playlist.title = this.new_title;
@@ -207,10 +204,6 @@ export default {
       }
     }
 
-    .delete-button{
-      display: none !important;
-    }
-
     .edit-button,
     .delete-button {
       display: block;
@@ -250,6 +243,8 @@ export default {
     .delete-button {
       right: unset;
       left: 10px;
+      opacity: 1;
+      background: transparent;
     }
 
 

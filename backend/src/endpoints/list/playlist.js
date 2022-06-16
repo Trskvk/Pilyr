@@ -1,5 +1,4 @@
 const {ApiEndpointSecured} = require('./__default_secured');
-const mongoose = require("mongoose");
 
 class PlaylistEndpoint extends ApiEndpointSecured {
     constructor({app}) {
@@ -39,10 +38,10 @@ class PlaylistEndpoint extends ApiEndpointSecured {
             handler: this.addSong,
             allowed_to: [],
             params: {
-                playlist_id: {
+                playlistId: {
                     required: true,
                 },
-                song_id: {
+                songId: {
                     required: true,
                 }
             }
@@ -53,10 +52,10 @@ class PlaylistEndpoint extends ApiEndpointSecured {
             handler: this.removeSong,
             allowed_to: [],
             params: {
-                playlist_id: {
+                playlistId: {
                     required: true,
                 },
-                song_id: {
+                songId: {
                     required: true,
                 }
             }
@@ -163,50 +162,50 @@ class PlaylistEndpoint extends ApiEndpointSecured {
 
         if (!item) throw new Error('Item not found');
 
-        if (!is_admin && !is_own) throw new Error('You are not allowed to edit this playlist');
+        if (!is_admin && !is_own && !(key === 'title' && item.type === 'public')) throw new Error('You are not allowed to edit this playlist');
 
         return await super.update({id, key, value});
     }
 
-    async addSong({playlist_id, song_id, user}, ...args) {
+    async addSong({playlistId, songId, user}, ...args) {
         let is_authed = user && user._id;
         let is_admin = user && user.role === 'admin';
 
-        let item = await this.db.findById(playlist_id).populate('creator').exec();
+        let item = await this.db.findById(playlistId).populate('creator').exec();
 
         if (!item) throw new Error('Item not found');
 
-        if (!is_admin && item.creator._id.toString() !== user._id.toString()) throw new Error('You are not allowed to edit this playlist');
+        if (item.type === "private" && !is_admin && item.creator._id.toString() !== user._id.toString()) throw new Error('You are not allowed to edit this playlist');
 
         await this.db.findOneAndUpdate({
-            _id: playlist_id
+            _id: playlistId
         }, {
             $addToSet: {
                 songs: {
-                    _id: song_id
+                    _id: songId
                 }
             }
         }).exec()
 
-        return await this.get({id: playlist_id, user}, ...args);
+        return await this.get({id: playlistId, user}, ...args);
     }
 
-    async removeSong({playlist_id, song_id, user}) {
+    async removeSong({playlistId, songId, user}) {
         let is_authed = user && user._id;
         let is_admin = user && user.role === 'admin';
 
-        let item = await this.db.findById(playlist_id).populate('creator').exec();
+        let item = await this.db.findById(playlistId).populate('creator').exec();
 
         if (!item) throw new Error('Item not found');
 
         if (item.type === "private" && !is_admin && item.creator._id.toString() !== user._id.toString()) throw new Error('You are not allowed to edit this playlist');
 
         return await this.db.findOneAndUpdate({
-            _id: playlist_id
+            _id: playlistId
         }, {
             $pullAll: {
                 songs: [{
-                    _id: song_id
+                    _id: songId
                 }]
             }
         }).populate('songs').exec()

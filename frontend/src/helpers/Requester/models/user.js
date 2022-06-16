@@ -36,19 +36,6 @@ class User extends DefaultModel {
 
         return response;
     }
-
-    // async logout() {
-    //     if (!this.token)
-    //         throw new Error('You are not logged in');
-    //
-    //     let response = await this.ajax
-    //         .request('GET', `${this.path}/logout`, {
-    //             token: this.ajax.token
-    //         });
-    //
-    //     // TODO: check response
-    //     this.ajax.token = null;
-    // }
 }
 
 export default User;
